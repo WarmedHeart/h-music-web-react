@@ -11,7 +11,7 @@ export default memo(function App() {
   return (
     <HashRouter>
       <HAppHeader />
-        {renderRoutes(routes)}
+      {renderRoutes(routes)}
       <HAppFooter />
     </HashRouter>
   )
