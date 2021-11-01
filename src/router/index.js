@@ -1,13 +1,73 @@
+import React from "react";
+import { Redirect } from "react-router-dom";
+
+// const HDiscover = React.lazy(() => import("@/pages/discover"));
+// const HRecommend = React.lazy(_ => import("../pages/discover/c-pages/recommend"));
+// const HRanking = React.lazy(_ => import("../pages/discover/c-pages/ranking"));
+// const HSongs = React.lazy(_ => import("../pages/discover/c-pages/songs"));
+// const HDjradio = React.lazy(_ => import("../pages/discover/c-pages/djradio"));
+// const HArtist = React.lazy(_ => import("../pages/discover/c-pages/artist"));
+// const HAlbum = React.lazy(_ => import("../pages/discover/c-pages/album"));
+
+// const HFriend = React.lazy(_ => import("../pages/friend"));
+// const HMine = React.lazy(_ => import("../pages/mine"));
+
 import HDiscover from "@/pages/discover";
+import HRecommend from "../pages/discover/c-pages/recommend";
+import HRanking from "../pages/discover/c-pages/ranking";
+import HSongs from "../pages/discover/c-pages/songs";
+import HDjradio from "../pages/discover/c-pages/djradio";
+import HArtist from "../pages/discover/c-pages/artist";
+import HAlbum from "../pages/discover/c-pages/album";
+
 import HMine from "@/pages/mine";
 import HFriend from "@/pages/friend";
-
 
 const routes = [
   {
     path: "/",
     exact: true,
-    component: HDiscover
+    render: () => (
+      <Redirect to="/discover"/>
+    )
+  },
+  {
+    path: "/discover",
+    component: HDiscover,
+    routes: [
+      {
+        path: "/discover",
+        exact: true,
+        render: () => (
+          <Redirect to="/discover/recommend"/>
+        )
+      },
+      {
+        path: "/discover/recommend",
+        component: HRecommend
+      },
+      {
+        path: "/discover/ranking",
+        component: HRanking
+      },
+      {
+        path: "/discover/songs",
+        component: HSongs
+      },
+      {
+        path: "/discover/djradio",
+        exact: true,
+        component: HDjradio
+      },
+      {
+        path: "/discover/artist",
+        component: HArtist
+      },
+      {
+        path: "/discover/album",
+        component: HAlbum
+      }
+    ]
   },
   {
     path: "/mine",
