@@ -14,7 +14,7 @@ const HThemeHeaderRecommend = memo(function(props) {
           {
             keywords.map((item, index) => {
               return (
-                <div className="item" key="item">
+                <div className="item" key={item}>
                   <a href="todo">{item}</a>
                   <span className="divider">{ index !== keywords.length - 1 ? '|' : ''} </span>
                 </div>

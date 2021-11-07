@@ -30,7 +30,7 @@ export default memo(function HHotRecommend() {
       <HThemeHeaderRecommend title="热门推荐" keywords={["华语", "流行", "民谣", "摇滚", "电子"]} />
       {
         hotRecommends.map((item, index) => (
-          <div key="item.id">
+          <div key={item.id}>
             {item.name}
           </div>
         ))
