@@ -25,7 +25,7 @@ export default memo(function HSongsCover(props) {
         {info.name}
       </div>
       <div className="cover-source text-nowrap">
-        by {info.copywriter || info.creator.nickname}
+        by {info.copywriter || info.name}
       </div>
     </SongsCoverWrapper>
   )
