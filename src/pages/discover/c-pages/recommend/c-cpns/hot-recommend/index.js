@@ -2,12 +2,11 @@ import React, { memo, useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { HOT_RECOMMEND_LIMIT } from '@/common/contants';
+import { getHotBannerAction } from '../../store/actionCreators';
 
 import HThemeHeaderRecommend from '@/components/theme-header-recommend';
 import HSongsCover from '@/components/songs-cover';
-
 import { HotRecommendWrapper } from './style';
-import { getHotBannerAction } from '../../store/actionCreater';
 
 export default memo(function HHotRecommend() {
   // state
