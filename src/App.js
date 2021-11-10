@@ -8,7 +8,7 @@ import store from './store';
 
 import HAppHeader from '@/components/app-header';
 import HAppFooter from '@/components/app-footer';
-
+import HAppPlayerBar from './pages/player/app-player-bar';
 
 export default memo(function App() {
   return (
@@ -17,6 +17,7 @@ export default memo(function App() {
         <HAppHeader />
         {renderRoutes(routes)}
         <HAppFooter />
+        <HAppPlayerBar />
       </HashRouter>
     </Provider>
   )
