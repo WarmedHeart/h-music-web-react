@@ -1,27 +1,27 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
-// const HDiscover = React.lazy(() => import("@/pages/discover"));
-// const HRecommend = React.lazy(_ => import("../pages/discover/c-pages/recommend"));
-// const HRanking = React.lazy(_ => import("../pages/discover/c-pages/ranking"));
-// const HSongs = React.lazy(_ => import("../pages/discover/c-pages/songs"));
-// const HDjradio = React.lazy(_ => import("../pages/discover/c-pages/djradio"));
-// const HArtist = React.lazy(_ => import("../pages/discover/c-pages/artist"));
-// const HAlbum = React.lazy(_ => import("../pages/discover/c-pages/album"));
+const HDiscover = React.lazy(() => import("@/pages/discover"));
+const HRecommend = React.lazy(_ => import("../pages/discover/c-pages/recommend"));
+const HRanking = React.lazy(_ => import("../pages/discover/c-pages/ranking"));
+const HSongs = React.lazy(_ => import("../pages/discover/c-pages/songs"));
+const HDjradio = React.lazy(_ => import("../pages/discover/c-pages/djradio"));
+const HArtist = React.lazy(_ => import("../pages/discover/c-pages/artist"));
+const HAlbum = React.lazy(_ => import("../pages/discover/c-pages/album"));
 
-// const HFriend = React.lazy(_ => import("../pages/friend"));
-// const HMine = React.lazy(_ => import("../pages/mine"));
+const HFriend = React.lazy(_ => import("../pages/friend"));
+const HMine = React.lazy(_ => import("../pages/mine"));
 
-import HDiscover from "@/pages/discover";
-import HRecommend from "../pages/discover/c-pages/recommend";
-import HRanking from "../pages/discover/c-pages/ranking";
-import HSongs from "../pages/discover/c-pages/songs";
-import HDjradio from "../pages/discover/c-pages/djradio";
-import HArtist from "../pages/discover/c-pages/artist";
-import HAlbum from "../pages/discover/c-pages/album";
+// import HDiscover from "@/pages/discover";
+// import HRecommend from "../pages/discover/c-pages/recommend";
+// import HRanking from "../pages/discover/c-pages/ranking";
+// import HSongs from "../pages/discover/c-pages/songs";
+// import HDjradio from "../pages/discover/c-pages/djradio";
+// import HArtist from "../pages/discover/c-pages/artist";
+// import HAlbum from "../pages/discover/c-pages/album";
 
-import HMine from "@/pages/mine";
-import HFriend from "@/pages/friend";
+// import HMine from "@/pages/mine";
+// import HFriend from "@/pages/friend";
 
 const routes = [
   {
