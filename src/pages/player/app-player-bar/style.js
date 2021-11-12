@@ -24,6 +24,11 @@ export const PlaybarWrapper = styled.div`
 export const Control = styled.div`
   display: flex;
   align-items: center;
+  .prev, .next, .play {
+    &:hover {
+      cursor: pointer;
+    } 
+  } 
 
   .prev, .next {
     width: 28px;

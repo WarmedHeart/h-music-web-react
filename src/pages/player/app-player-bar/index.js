@@ -1,7 +1,11 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getSongDetailAction } from '../store/actionCreators';
+import {
+  getSongDetailAction,
+  changeSequenceAction,
+  changeMusicAction
+} from '../store/actionCreators';
 import { getSizeImage, formatDate, getPlaySong } from '@/utils/format-utils';
 
 import { Slider } from 'antd';
@@ -19,19 +23,26 @@ export default memo(function HAppPlayerBar() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   // redux hooks
-  const { currentSong } = useSelector(state => ({
-    currentSong: state.getIn(["player", "currentSong"])
+  const { playList, currentSong, sequence } = useSelector(state => ({
+    playList: state.getIn(["player", "playList"]),
+    currentSong: state.getIn(["player", "currentSong"]),
+    sequence: state.getIn(["player", "sequence"])
   }))
   const dispatch = useDispatch();
 
   // other hooks
   const audioRef = useRef();
   useEffect(() => {
-    dispatch(getSongDetailAction())
+    dispatch(getSongDetailAction(1395624119))
   }, [dispatch])
 
   useEffect(() => {
     audioRef.current.src = getPlaySong(currentSong.id);
+    audioRef.current.play().then(() => {
+      setIsPlaying(true);
+    }).catch(() => {
+      setIsPlaying(false);
+    })
   }, [currentSong])
 
   // others
@@ -47,6 +58,15 @@ export default memo(function HAppPlayerBar() {
     setIsPlaying(!isPlaying);
   }, [isPlaying]);
 
+  const changeSequence = useCallback(() => {
+    const currentSequence = (sequence + 1) % 3;
+    dispatch(changeSequenceAction(currentSequence));
+  }, [dispatch, sequence]);
+  
+  const changeMusic = useCallback((tab) => {
+    dispatch(changeMusicAction(tab));
+  }, [dispatch])
+
   const sliderChange = useCallback((value) => {
     setIsChanging(true);
     const currentTime = value / 100 * duration;
@@ -55,7 +75,6 @@ export default memo(function HAppPlayerBar() {
   }, [duration])
   
   const sliderAfterChange = useCallback((value) => {
-
     const currentTime = value / 100 * duration / 1000;
     audioRef.current.currentTime = currentTime;
     setCurrentTime(currentTime * 1000);
@@ -75,13 +94,22 @@ export default memo(function HAppPlayerBar() {
     }
   }
 
+  const handleMusicEnded = function(e) {
+    if (sequence === 2 || playList.length === 1)  {  //单曲循环
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    } else {
+       dispatch(changeMusicAction(1));
+    }
+  }
+
   return (
     <PlaybarWrapper className="sprite_player">
       <div className="content wrap-v2">
         <Control isPlaying={isPlaying}>
-          <button className="prev sprite_player"></button>
+          <button className="prev sprite_player" onClick={e => changeMusic(-1)}></button>
           <button className="play sprite_player" onClick={e => playMusic()}></button>
-          <button className="next sprite_player"></button>
+          <button className="next sprite_player" onClick={e => changeMusic(1)}></button>
         </Control>
         <PlayInfo>
           <div className="image">
@@ -105,19 +133,23 @@ export default memo(function HAppPlayerBar() {
             </div>
           </div>
         </PlayInfo>
-        <Operator>
+        <Operator sequence={sequence}>
           <div className="left">
             <button className="btn favor sprite_player"></button>
             <button className="btn share sprite_player"></button>
           </div>
           <div className="right sprite_player">
             <button className="btn volume sprite_player"></button>
-            <button className="btn loop sprite_player"></button>
+            <button className="btn loop sprite_player" onClick={e => changeSequence()}></button>
             <button className="btn playlist sprite_player"></button>
           </div>
         </Operator>
       </div>
-      <audio ref={audioRef} onTimeUpdate={e => timeUpdate(e)}/>
+      <audio
+        ref={audioRef}
+        onTimeUpdate={e => timeUpdate(e)}
+        onEnded={e => handleMusicEnded(e)}
+      />
     </PlaybarWrapper>
   )
 })
